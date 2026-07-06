@@ -1,0 +1,38 @@
+﻿﻿
+<!DOCTYPE html>
+<html>
+<head>
+    <title>
+        @ViewBag.TitleHeader
+    </title>
+    <link rel="stylesheet" href="~/resources/Index.css" />
+</head>
+
+<body>
+    <header>
+        <img src="~/resources/GroupeHN.png" class="image" alt="GroupeHN" />
+        <h1>@ViewBag.TitleHeader</h1>
+    </header>
+
+    <nav>
+        <ul>
+            @if (ViewBag.TitleHeader != "HN-TP LOCAL")
+            {
+                <li><a href="/Home/Index/Index">Accueil</a></li>
+            }
+            @if (ViewBag.TitleHeader != "Formulaire")
+            {
+                <li><a href="/Home/Index/Form">Formulaire</a></li>
+            }
+            @if (ViewBag.TitleHeader != "Liste avis")
+            {
+                <li><a href="/Home/Index/OpinionList">Liste Avis</a></li>
+            }
+        </ul>
+    </nav>
+
+    <section>
+        @RenderBody()
+    </section>
+</body>
+</html>
