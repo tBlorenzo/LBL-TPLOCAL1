@@ -1,0 +1,51 @@
+﻿<head>
+    <title>Liste des avis</title>
+    <link rel="stylesheet" href="~/resources/Index.css" />
+</head>
+
+
+<body>
+    <header>
+        <img src="~/resources/GroupeHN.png " class="image " alt="GroupeHN " />
+        <h1>Liste des avis</h1>
+    </header>
+
+    
+    <nav>
+        <ul>
+            <li><a href="/Home/Index/">Accueil</a></li>
+            <li><a href="/Home/Index/OpinionList">List avis</a></li>
+        </ul>
+    </nav>
+
+    <section>
+        <form asp-action="ValidationForm" method="post">
+            <table class="form-table">
+            <caption class="table-title">Liste</caption>
+            <tr>
+                <td>Nom</td>
+                <td>Prénom</td>
+                <td>Avis donné</td>
+            </tr>
+
+
+              @foreach (var item in Model)
+              {
+                  <tr>
+                      <td>@item.LastName</td>
+                      <td>@item.FirstName</td>
+            
+                      @if (item.OpinionGiven == "O")
+                      {
+                          <td style="background-color: green; color: black; ">Oui</td>
+                      }
+                      else
+                      {
+                          <td style="background-color: red; color: black; ">Non</td>
+                      }
+                  </tr>
+              }
+            </table>
+        </form>
+    </section>
+</body>

@@ -22,11 +22,13 @@ namespace TPLOCAL1.Controllers
                 switch (id)
                 {
                     case "OpinionList":
-                        //TODO : code reading of the xml files provide
-                        return View(id);
+                        string filePath = Path.Combine(Directory.GetCurrentDirectory(), "XlmFile", "DataAvis.xml");
+                        OpinionList opinionList = new OpinionList();
+                        var avis = opinionList.GetAvis(filePath);
+                        return View(id, avis);
                     case "Form":
                         //TODO : call the Form view with data model empty
-                        return View(id);
+                        return View(id, new Avis());
                     default:
                         //retourn to the Index view (see routing in Program.cs)
                         return View();
@@ -37,13 +39,19 @@ namespace TPLOCAL1.Controllers
 
         //methode to send datas from form to validation page
         [HttpPost]
-        public ActionResult ValidationFormulaire(/*model*/)
+        public ActionResult ValidationForm(Avis avis)
         {
-            //TODO : test if model's fields are set
-            //if not, display an error message and stay on the form page
-            //else, call ValidationForm with the datas set by the user
-            return null;
+            if (avis.DateDebut >= new DateTime(2021, 01, 01))
+            {
+                ModelState.AddModelError("DateDebut", "La date doit être inférieure au 01/01/2021");
+            }
 
+            if (ModelState.IsValid)
+            {
+                return View("Validation", avis);
+            }
+
+            return View("Form", avis);
         }
     }
 }
